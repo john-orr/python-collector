@@ -51,16 +51,17 @@ def command_get(args):
     device.init()
 
     def output(data_list):
-		rawArray = [];
+		last_num = args.last_num
 		for line in data_list:
 			rawData = "{0}\t{1:%Y-%m-%d %H:%M:%S}\t{2:.1f}".format(*line)
 			rawArray = rawData.split('\t')
-			if (args.last_num < int(rawArray[0])):
+			if (last_num < int(rawArray[0])):
+				last_num = int(rawArray[0])
 				timestamp = rawArray[1].replace(' ', 'T')
 				data = [{"location":args.location,"timestamp":timestamp,"temperature":rawArray[2]}]
 				url = 'http://mca-central.herokuapp.com/temperatureData'
 				response = requests.post(url, json=data)
-		print(rawArray[0])
+		print(last_num)
 
     device.get_data(callback=output)
 
