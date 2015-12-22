@@ -47,11 +47,13 @@ def command_simpleset(args):
     device.update(param_put)
 
 def command_get(args):
-    device = elitech.Device(args.serial_port)
-    device.init()
+	device = elitech.Device(args.serial_port)
+	device.init()
+	global last_num
+	last_num = args.last_num
 
-    def output(data_list):
-		last_num = args.last_num
+	def output(data_list):
+		global last_num
 		for line in data_list:
 			rawData = "{0}\t{1:%Y-%m-%d %H:%M:%S}\t{2:.1f}".format(*line)
 			rawArray = rawData.split('\t')
@@ -61,9 +63,9 @@ def command_get(args):
 				data = [{"location":args.location,"timestamp":timestamp,"temperature":rawArray[2]}]
 				url = 'http://mca-central.herokuapp.com/temperatureData'
 				response = requests.post(url, json=data)
-		print(last_num)
 
-    device.get_data(callback=output)
+	device.get_data(callback=output)
+	print(last_num)
 
 def command_set(args):
     device = elitech.Device(args.serial_port)
