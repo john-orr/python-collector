@@ -1,7 +1,7 @@
-# collector
+# python-collector
 AKA Program A
 
-This is the NodeJS program running on the data gathering machines
+This is the python program running on the data gathering machines
 
 <ul>
 	<li>Detects changes in a DIR</li>
