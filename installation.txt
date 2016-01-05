@@ -1,0 +1,12 @@
+Copy elitech-datareader-0.9.1 to C:/
+Install python
+Add ;C:\Python27 to path variable
+Execute: cd C:\Python27\Scripts
+Execute: easy_install requests
+Execute: cd C:\elitech-datareader-0.9.1
+Execute: setup.py install
+Execute: cd C:\elitech-datareader-0.9.1\build\scripts-2.7
+Find what port number the thermometer is on by going to the device manager
+In the Ports section it is the Silicon Labs one
+Execute: runCollector.cmd {{location}} {{portNumber}}
+Follow the prompts on screen. It will display "Started" when the program has started
